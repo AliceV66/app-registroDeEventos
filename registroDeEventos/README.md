@@ -18,6 +18,8 @@ Características Principales
 
     Plantillas Reutilizables: Uso de un sistema de plantillas base con bloques para mantener el código DRY (Don't Repeat Yourself).
 
+hola
+
 Requisitos
 
     Python 3.8+
