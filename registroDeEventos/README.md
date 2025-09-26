@@ -73,7 +73,6 @@ Bash
 
 División del Trabajo
 
-Este proyecto fue desarrollado por dos personas, con las responsabilidades divididas de la siguiente manera:
 
     Desarrolladores(Backend):
 
