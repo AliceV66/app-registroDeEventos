@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from django.db import transaction
+from django.contrib import messages
 from .forms import EventoForm, ParticipanteForm
 from .models import Evento, Participante
 
@@ -12,7 +13,7 @@ def crear_evento(request):
         Evento,
         Participante,
         form=ParticipanteForm,
-        extra=1,
+        extra=3,
         can_delete=False
     )
 
@@ -32,6 +33,7 @@ def crear_evento(request):
                     participante.evento = evento # Se asigna el evento recién creado a cada participante.
                     participante.save() # Se guarda el participante en la Base de Datos.
 
+            messages.success(request, '¡Evento Registrado con ÉXITO!')
             return redirect('crear_evento') # Se redirige para limpiar el formulario y evitar reenvíos.
 
     # El usuario visita la página (método GET).
