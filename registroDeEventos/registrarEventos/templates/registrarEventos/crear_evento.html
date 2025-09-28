@@ -1,0 +1,42 @@
+
+{#ESQUELETO HTML#}
+
+<form method="post">
+    {% csrf_token %}
+
+    <h2>Evento</h2>
+    <div>
+        <label>Nombre del Evento:</label>
+        {{ evento_form.nombre }}
+    </div>
+    <div>
+        <label>Fecha:</label>
+        {{ evento_form.fecha }}
+    </div>
+    <div>
+        <label>Ubicación:</label>
+        {{ evento_form.ubicacion }}
+    </div>
+
+    <hr>
+
+    <h2>Participantes</h2>
+
+    {{ participante_formset.management_form }}
+
+    {% for form in participante_formset %}
+        <div class="participante">
+            <h4>Participante #{{ forloop.counter }}</h4>
+            <div>
+                <label>Nombre del Participante:</label>
+                {{ form.nombre }}
+            </div>
+            <div>
+                <label>Correo Electrónico:</label>
+                {{ form.correo }}
+            </div>
+        </div>
+    {% endfor %}
+    
+    <button type="submit">Guardar</button>
+</form>
