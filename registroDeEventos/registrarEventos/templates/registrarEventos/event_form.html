@@ -1,0 +1,120 @@
+{% extends 'registrarEventos/base.html' %}
+
+{% block title %}Register New Event{% endblock %}
+
+{% block content %}
+<style>
+    h1, h3 {
+        color: #000;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-left: 15px;
+    }
+    h1::before, h3::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 5px;
+        bottom: 5px;
+        width: 5px;
+        background-color: #ff00ff;
+    }
+    .form-control {
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        padding: 10px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .form-control:focus {
+        background-color: #fff;
+        border-color: #ff00ff;
+        box-shadow: 0 0 5px rgba(255, 0, 255, 0.25);
+        outline: none;
+    }
+    label {
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #555;
+    }
+    .btn-primary {
+        background-color: #ff00ff;
+        border: none;
+        color: #fff;
+        font-weight: 700;
+        padding: 12px 30px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    .btn-primary:hover {
+        background-color: #e600e6;
+        box-shadow: 0 4px 10px rgba(255, 0, 255, 0.3);
+    }
+    .form-section {
+        margin-bottom: 2rem;
+    }
+    .participant-form {
+        border: 1px solid #eee;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        background-color: #fafafa;
+    }
+</style>
+
+<h1>Crafting Digital Futures</h1>
+<p class="text-muted mb-5">We are an avant-garde software development company forging new realities. Our minimalist, elegant, and disruptive approach sets a new trend in digital experiences.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-section">
+        <h3>Event Details</h3>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.name.id_for_label }}" class="form-label">{{ form.name.label }}</label>
+                {{ form.name }}
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="{{ form.date.id_for_label }}" class="form-label">{{ form.date.label }}</label>
+                {{ form.date }}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.location.id_for_label }}" class="form-label">{{ form.location.label }}</label>
+            {{ form.location }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.description.id_for_label }}" class="form-label">{{ form.description.label }}</label>
+            {{ form.description }}
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h3>Participants</h3>
+        {{ formset.management_form }}
+        {% for participant_form in formset %}
+            <div class="participant-form">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ participant_form.name.id_for_label }}" class="form-label">{{ participant_form.name.label }}</label>
+                        {{ participant_form.name }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ participant_form.email.id_for_label }}" class="form-label">{{ participant_form.email.label }}</label>
+                        {{ participant_form.email }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Register Event</button>
+    </div>
+</form>
+{% endblock %}

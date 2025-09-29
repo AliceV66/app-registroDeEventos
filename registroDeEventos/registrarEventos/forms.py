@@ -1,4 +1,5 @@
 from django import forms
+<<<<<<< HEAD
 from .models import Evento, Participante
 import datetime
 
@@ -38,3 +39,18 @@ class ParticipanteForm(forms.ModelForm):
     class Meta:
         model = Participante
         fields = ['nombre', 'correo']
+=======
+from django.forms import formset_factory
+
+class EventForm(forms.Form):
+    name = forms.CharField(max_length=100, label='Event Name')
+    date = forms.DateTimeField(label='Event Date')
+    location = forms.CharField(max_length=255, label='Location')
+    description = forms.CharField(widget=forms.Textarea, label='Description')
+
+class ParticipantForm(forms.Form):
+    name = forms.CharField(max_length=100, label='Participant Name')
+    email = forms.EmailField(label='Email')
+
+ParticipantFormSet = formset_factory(ParticipantForm, extra=1)
+>>>>>>> 23f8484 (implementacion del front, preparando para la conexion con back)
