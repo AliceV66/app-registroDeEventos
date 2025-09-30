@@ -76,21 +76,17 @@
         <h3>Event Details</h3>
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="{{ form.name.id_for_label }}" class="form-label">{{ form.name.label }}</label>
-                {{ form.name }}
+                <label for="{{ form.nombre.id_for_label }}" class="form-label">{{ form.nombre.label }}</label>
+                {{ form.nombre }}
             </div>
             <div class="col-md-6 mb-3">
-                <label for="{{ form.date.id_for_label }}" class="form-label">{{ form.date.label }}</label>
-                {{ form.date }}
+                <label for="{{ form.fecha.id_for_label }}" class="form-label">{{ form.fecha.label }}</label>
+                {{ form.fecha }}
             </div>
         </div>
         <div class="mb-3">
-            <label for="{{ form.location.id_for_label }}" class="form-label">{{ form.location.label }}</label>
-            {{ form.location }}
-        </div>
-        <div class="mb-3">
-            <label for="{{ form.description.id_for_label }}" class="form-label">{{ form.description.label }}</label>
-            {{ form.description }}
+            <label for="{{ form.ubicacion.id_for_label }}" class="form-label">{{ form.ubicacion.label }}</label>
+            {{ form.ubicacion }}
         </div>
     </div>
 
@@ -101,12 +97,12 @@
             <div class="participant-form">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="{{ participant_form.name.id_for_label }}" class="form-label">{{ participant_form.name.label }}</label>
-                        {{ participant_form.name }}
+                        <label for="{{ participant_form.nombre.id_for_label }}" class="form-label">{{ participant_form.nombre.label }}</label>
+                        {{ participant_form.nombre }}
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="{{ participant_form.email.id_for_label }}" class="form-label">{{ participant_form.email.label }}</label>
-                        {{ participant_form.email }}
+                        <label for="{{ participant_form.correo.id_for_label }}" class="form-label">{{ participant_form.correo.label }}</label>
+                        {{ participant_form.correo }}
                     </div>
                 </div>
             </div>

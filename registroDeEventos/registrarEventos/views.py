@@ -44,10 +44,10 @@ def crear_evento(request):
 
     # Se preparan los datos que se enviarán a la plantilla HTML.
     context = {
-        'evento_form': evento_form,
-        'participante_formset': participante_formset,
+        'form': evento_form,
+        'formset': participante_formset,
     }
 
     # Se rendereiza el HTML con los formularios.
-    return render(request, 'registrarEventos/crear_evento.html', context)
+    return render(request, 'registrarEventos/event_form.html', context)
 
