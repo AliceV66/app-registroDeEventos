@@ -1,22 +1,67 @@
 {% extends 'registrarEventos/base.html' %}
 
-{% block title %}Registrar un Nuevo Evento{% endblock %}
+{% block title %}Registrar Nuevo Evento{% endblock %}
 
 {% block content %}
-    <h1>Registrar un Nuevo Evento</h1>
 
-    <form method="post">
-        {% csrf_token %}
-        <h2>Evento</h2>
-        {{ evento_form.as_p }}
-        <hr>
-        <h2>Participantes</h2>
+<h1>Planea un evento épico</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-section">
+        <h3>Detalles del evento</h3>
+        
+        {% if evento_form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ evento_form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="{{ evento_form.nombre.id_for_label }}" class="form-label">{{ evento_form.nombre.label }}</label>
+                {{ evento_form.nombre }}
+                {% if evento_form.nombre.errors %}<div class="error-list">{{ evento_form.nombre.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="{{ evento_form.fecha.id_for_label }}" class="form-label">{{ evento_form.fecha.label }}</label>
+                {{ evento_form.fecha }}
+                {% if evento_form.fecha.errors %}<div class="error-list">{{ evento_form.fecha.errors }}</div>{% endif %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="{{ evento_form.ubicacion.id_for_label }}" class="form-label">{{ evento_form.ubicacion.label }}</label>
+            {{ evento_form.ubicacion }}
+            {% if evento_form.ubicacion.errors %}<div class="error-list">{{ evento_form.ubicacion.errors }}</div>{% endif %}
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h3>Participantes</h3>
+        
         {{ participante_formset.management_form }}
+        
         {% for form in participante_formset %}
-            <h4>Participante #{{ forloop.counter }}</h4>
-            {{ form.as_p }}
-            <hr style="border-style: dotted;">
+            <div class="participant-form">
+                <h4 class="h6">Participante #{{ forloop.counter }}</h4>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.nombre.id_for_label }}" class="form-label">{{ form.nombre.label }}</label>
+                        {{ form.nombre }}
+                        {% if form.nombre.errors %}<div class="error-list">{{ form.nombre.errors }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.correo.id_for_label }}" class="form-label">{{ form.correo.label }}</label>
+                        {{ form.correo }}
+                        {% if form.correo.errors %}<div class="error-list">{{ form.correo.errors }}</div>{% endif %}
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-        <button type="submit">Guardar</button>
-    </form>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Registrar evento</button>
+    </div>
+</form>
 {% endblock %}

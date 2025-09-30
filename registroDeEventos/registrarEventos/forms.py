@@ -43,11 +43,3 @@ class ParticipanteForm(forms.ModelForm):
             'nombre': forms.TextInput(attrs={'placeholder': 'Nombre del participante'}),
             'correo': forms.EmailInput(attrs={'placeholder': 'Correo electrónico'}),
         }
-
-    # Validación para que el correo tenga formato válido
-    def clean_correo(self):
-        correo = self.cleaned_data.get('correo')
-        if correo and '@' not in correo:
-            raise forms.ValidationError("Por favor ingresa un correo electrónico válido.")
-        return correo
-

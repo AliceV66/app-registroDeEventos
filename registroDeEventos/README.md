@@ -132,20 +132,21 @@ El formulario de registro de eventos estará disponible en la página principal.
 
 ```
 registroDeEventos/
-├── registroDeEventos/          # Configuración del proyecto Django
-│   ├── settings.py            # Configuración principal
-│   ├── urls.py               # Rutas principales
+├── registroDeEventos/      # Configuración del proyecto Django
+│   ├── settings.py         # Configuración principal
+│   ├── urls.py             # Rutas principales
 │   └── ...
-├── registrarEventos/          # Aplicación principal
-│   ├── models.py             # Modelos de datos (Evento, Participante)
-│   ├── forms.py              # Formularios y validaciones
-│   ├── views.py              # Lógica de la vista crear_evento
-│   ├── urls.py               # Rutas de la aplicación
-│   ├── templates/            # Plantillas HTML
-│   └── migrations/           # Migraciones de base de datos
-├── requirements.txt          # Dependencias de Python
-├── manage.py                # Script de gestión de Django
-└── README.md                # Este archivo
+├── registrarEventos/       # Aplicación principal
+│   ├── models.py           # Modelos de datos (Evento, Participante)
+│   ├── forms.py            # Formularios y validaciones
+│   ├── views.py            # Lógica de la vista crear_evento
+│   ├── urls.py             # Rutas de la aplicación
+│   ├── templates/          # Plantillas HTML
+│   ├── static/             # Archivos estáticos (CSS, JS, imágenes)
+│   └── migrations/         # Migraciones de base de datos
+├── requirements.txt        # Dependencias de Python
+├── manage.py               # Script de gestión de Django
+└── README.md               # Este archivo
 ```
 
 ## Tecnologías Utilizadas

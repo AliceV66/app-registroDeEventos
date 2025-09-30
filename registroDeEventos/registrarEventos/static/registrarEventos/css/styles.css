@@ -1,0 +1,113 @@
+/* --- Estilos Generales --- */
+body {
+    background-color: #f0f2f5;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* --- Barra de Navegación --- */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+.navbar-brand {
+    font-size: 2.5rem; /* Tamaño aumentado para resaltar */
+    font-weight: 700;
+    color: #000;
+    letter-spacing: 1px;
+}
+
+/* --- Contenedor Principal y Alertas --- */
+.container {
+    background-color: #ffffff;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    margin-top: 2rem;
+    border: 1px solid #e0e0e0;
+}
+.alert {
+    border-radius: 4px;
+}
+.alert-success {
+    background-color: #e6fffa;
+    color: #004d40;
+    border: 1px solid #b2dfdb;
+}
+.btn-close {
+    background: none;
+}
+
+/* --- Estilos del Formulario --- */
+h1, h3 { 
+    color: #000; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px; 
+    margin-bottom: 1.5rem; 
+    position: relative; 
+    padding-left: 15px; 
+}
+h1::before, h3::before { 
+    content: ''; 
+    position: absolute; 
+    left: 0; 
+    top: 5px; 
+    bottom: 5px; 
+    width: 5px; 
+    background-color: #ff00ff; 
+}
+.form-control { 
+    background-color: #f8f9fa; 
+    border: 1px solid #ced4da; 
+    border-radius: 4px; 
+    padding: 10px; 
+    transition: border-color 0.3s, box-shadow 0.3s; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+.form-control:focus { 
+    background-color: #fff; 
+    border-color: #ff00ff; 
+    box-shadow: 0 0 5px rgba(255, 0, 255, 0.25); 
+    outline: none; 
+}
+label { 
+    font-weight: 700; 
+    margin-bottom: 0.5rem; 
+    color: #555; 
+    display: block; 
+}
+.btn-primary { 
+    background-color: #ff00ff; 
+    border: none; 
+    color: #fff; 
+    font-weight: 700; 
+    padding: 12px 30px; 
+    border-radius: 4px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    transition: background-color 0.3s, box-shadow 0.3s; 
+}
+.btn-primary:hover { 
+    background-color: #e600e6; 
+    box-shadow: 0 4px 10px rgba(255, 0, 255, 0.3); 
+}
+.form-section { 
+    margin-bottom: 2rem; 
+}
+.participant-form { 
+    border: 1px solid #eee; 
+    padding: 1.5rem; 
+    margin-bottom: 1rem; 
+    border-radius: 8px; 
+    background-color: #fafafa; 
+}
+.error-list { 
+    color: #e74c3c; 
+    list-style-type: none; 
+    padding: 0; 
+    margin-top: 0.5em; 
+    font-size: 0.9em; 
+    font-weight: bold; 
+}
