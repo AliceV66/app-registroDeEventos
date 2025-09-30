@@ -1,0 +1,22 @@
+{% extends 'registrarEventos/base.html' %}
+
+{% block title %}Registrar un Nuevo Evento{% endblock %}
+
+{% block content %}
+    <h1>Registrar un Nuevo Evento</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <h2>Evento</h2>
+        {{ evento_form.as_p }}
+        <hr>
+        <h2>Participantes</h2>
+        {{ participante_formset.management_form }}
+        {% for form in participante_formset %}
+            <h4>Participante #{{ forloop.counter }}</h4>
+            {{ form.as_p }}
+            <hr style="border-style: dotted;">
+        {% endfor %}
+        <button type="submit">Guardar</button>
+    </form>
+{% endblock %}
