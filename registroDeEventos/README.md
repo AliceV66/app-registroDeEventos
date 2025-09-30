@@ -1,93 +1,158 @@
-Proyecto de Registro de Eventos en Django
+# Sistema de Registro de Eventos
 
-Este es un proyecto web simple desarrollado en Django que permite a los usuarios registrar eventos y añadir participantes a cada evento. El proyecto fue creado como un ejercicio para demostrar el manejo de formularios, FormSets, validación de datos y plantillas reutilizables en Django.
+Este es un proyecto web desarrollado en Django que permite registrar eventos y gestionar participantes asociados. El proyecto demuestra el uso avanzado de formularios en Django, incluyendo FormSets inline, validaciones personalizadas y manejo de transacciones.
 
-Características Principales
+## Características Principales
 
-    Registro de Eventos: Formulario para crear un nuevo evento con nombre, fecha, ubicación y descripción.
+###  **Registro de Eventos**
+- Formulario único para crear eventos con nombre, fecha y ubicación
+- Validación automática de fecha futura
+- Prevención de eventos duplicados (mismo nombre y fecha)
+- Ubicación opcional
 
-    Gestión de Participantes: Posibilidad de añadir uno o más participantes (nombre y correo) al evento en el mismo formulario de registro.
+###  **Gestión de Participantes**
+- Formulario integrado que permite añadir múltiples participantes por evento
+- Hasta 3 participantes por defecto (configurable)
+- Validación de formato de correo electrónico
+- Asociación automática de participantes al evento creado
 
-    Validación de Datos:
+###  **Validaciones Implementadas**
+- **Fecha futura**: Los eventos deben programarse para fechas posteriores al día actual
+- **Unicidad**: No se permiten eventos con el mismo nombre en la misma fecha
+- **Correo válido**: Los participantes deben tener correos con formato correcto
+- **Campos obligatorios**: Validación de todos los campos requeridos
 
-        El nombre del evento no puede superar los 100 caracteres.
+###  **Características Técnicas**
+- **FormSets Inline**: Manejo avanzado de formularios relacionados
+- **Transacciones Atómicas**: Garantía de integridad de datos
+- **Mensajes de Usuario**: Feedback visual de operaciones exitosas
+- **Plantillas Base**: Sistema de herencia de plantillas DRY
 
-        La fecha del evento debe ser una fecha futura.
+## Requisitos del Sistema
 
-        Los campos obligatorios son validados para evitar envíos vacíos.
+- **Python**: 3.8 o superior
+- **Django**: 5.2.6 (especificado en requirements.txt)
+- **Base de datos**: SQLite (por defecto) o cualquier base compatible con Django
+- **Git**: Opcional, para control de versiones
 
-    Plantillas Reutilizables: Uso de un sistema de plantillas base con bloques para mantener el código DRY (Don't Repeat Yourself).
+## Instalación y Configuración
 
-hola
+### 1. Preparar el Entorno
 
-Requisitos
-
-    Python 3.8+
-
-    Django 5.0+
-
-    (Opcional) Git para clonar el repositorio.
-
-Instalación y Ejecución
-
-Sigue estos pasos para poner en marcha el proyecto en tu entorno local.
-
-    Clona el repositorio (si aplica):
-    Bash
-
-git clone [URL-DEL-REPOSITORIO]
-cd [NOMBRE-DEL-PROYECTO]
-
-Crea y activa un entorno virtual:
-Bash
-
-# En Windows
+```bash
+# Crear entorno virtual
 python -m venv venv
-.\venv\Scripts\activate
 
-# En macOS / Linux
-python3 -m venv venv
+# Activar entorno virtual
+# En Windows:
+venv\Scripts\activate
+# En macOS/Linux:
 source venv/bin/activate
+```
 
-Instala las dependencias:
-(Asegúrate de tener un archivo requirements.txt en tu proyecto)
-Bash
+### 2. Instalar Dependencias
 
+```bash
+# Instalar Django y dependencias
 pip install -r requirements.txt
+```
 
-Si no tienes un requirements.txt, instala Django manualmente:
-Bash
+### 3. Configurar Base de Datos
 
-pip install django
-
-Aplica las migraciones:
-Esto creará las tablas necesarias en la base de datos.
-Bash
-
+```bash
+# Aplicar migraciones
 python manage.py migrate
+```
 
-Inicia el servidor de desarrollo:
-Bash
+### 4. Ejecutar el Servidor
 
-    python manage.py runserver
+```bash
+# Iniciar servidor de desarrollo
+python manage.py runserver
+```
 
-    Abre tu navegador y ve a http://127.0.0.1:8000/ para ver la aplicación en funcionamiento.
+### 5. Acceder a la Aplicación
 
-División del Trabajo
+Abre tu navegador web y ve a: **http://127.0.0.1:8000/**
 
+El formulario de registro de eventos estará disponible en la página principal.
 
-    Desarrolladores(Backend):
+## Arquitectura del Proyecto
 
-        Configuración del proyecto y la base de datos (models.py).
+###  **Modelo de Datos**
+- **Evento**: Entidad principal con nombre, fecha y ubicación opcional
+- **Participante**: Relacionado con Evento mediante Foreign Key con CASCADE
+- Relación uno-a-muchos entre Evento y Participante
 
-        Creación de los formularios y FormSets (forms.py).
+###  **Formularios**
+- **EventoForm**: ModelForm con validaciones personalizadas de fecha y unicidad
+- **ParticipanteForm**: ModelForm para participantes con validación de correo
+- **FormSet Inline**: Manejo integrado de múltiples participantes por evento
 
-        Implementación de la lógica de validación personalizada.
+###  **Vista Principal**
+- Función `crear_evento` que maneja tanto GET como POST
+- Uso de `inlineformset_factory` para participantes
+- Manejo de transacciones para integridad de datos
+- Sistema de mensajes para feedback al usuario
 
-    Desarrolladores (Frontend y Vistas):
+###  **Plantillas**
+- Sistema de herencia de plantillas con `base.html`
+- Formulario integrado en `event_form.html`
+- Diseño responsivo y user-friendly
 
-        Desarrollo de la lógica de las vistas para manejar las solicitudes GET y POST (views.py).
+###  **URLs**
+- Ruta raíz (`/`) apunta directamente al formulario de creación de eventos
+- Integración con el sistema de URLs de Django
 
-        Creación de las plantillas HTML y la estructura del frontend.
+## Uso de la Aplicación
 
-        Configuración de las rutas de la aplicación (urls.py).
+### Crear un Evento
+
+1. **Accede** a la aplicación en tu navegador
+2. **Completa** el formulario de evento:
+   - **Nombre**: Nombre único del evento (máx. 100 caracteres)
+   - **Fecha**: Selecciona una fecha futura usando el selector de fecha
+   - **Ubicación**: Especifica dónde se realizará el evento (opcional)
+3. **Añade participantes**:
+   - Completa al menos un participante con nombre y correo válido
+   - Puedes añadir hasta 3 participantes adicionales
+   - El correo debe tener formato válido (@ dominio)
+4. **Envía** el formulario
+5. **Verifica** el mensaje de confirmación
+
+### Características del Formulario
+
+- **Validación en tiempo real** de fechas futuras
+- **Prevención de duplicados** de eventos
+- **Formato automático** de campos de fecha y correo
+- **Transacción atómica** que garantiza que si algo falla, no se guarda nada
+- **Mensajes de éxito** para confirmar el registro
+
+## Estructura del Proyecto
+
+```
+registroDeEventos/
+├── registroDeEventos/          # Configuración del proyecto Django
+│   ├── settings.py            # Configuración principal
+│   ├── urls.py               # Rutas principales
+│   └── ...
+├── registrarEventos/          # Aplicación principal
+│   ├── models.py             # Modelos de datos (Evento, Participante)
+│   ├── forms.py              # Formularios y validaciones
+│   ├── views.py              # Lógica de la vista crear_evento
+│   ├── urls.py               # Rutas de la aplicación
+│   ├── templates/            # Plantillas HTML
+│   └── migrations/           # Migraciones de base de datos
+├── requirements.txt          # Dependencias de Python
+├── manage.py                # Script de gestión de Django
+└── README.md                # Este archivo
+```
+
+## Tecnologías Utilizadas
+
+- **Django 5.2.6**: Framework web principal
+- **SQLite**: Base de datos por defecto
+- **Python 3.8+**: Lenguaje de programación
+- **HTML5/CSS3**: Interfaz de usuario
+- **FormSets**: Para manejo de múltiples participantes
+- **Bootstrap**: Framework CSS (si está incluido en templates)

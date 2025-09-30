@@ -1,5 +1,4 @@
 from django import forms
-<<<<<<< HEAD
 from .models import Evento, Participante
 import datetime
 
@@ -32,25 +31,23 @@ class EventoForm(forms.ModelForm):
                     "Ya existe un evento con este nombre en la misma fecha."
                 )
         
-        return cleaned_data 
+        return cleaned_data
+
 
 class ParticipanteForm(forms.ModelForm):
-    
+
     class Meta:
         model = Participante
         fields = ['nombre', 'correo']
-=======
-from django.forms import formset_factory
+        widgets = {
+            'nombre': forms.TextInput(attrs={'placeholder': 'Nombre del participante'}),
+            'correo': forms.EmailInput(attrs={'placeholder': 'Correo electrónico'}),
+        }
 
-class EventForm(forms.Form):
-    name = forms.CharField(max_length=100, label='Event Name')
-    date = forms.DateTimeField(label='Event Date')
-    location = forms.CharField(max_length=255, label='Location')
-    description = forms.CharField(widget=forms.Textarea, label='Description')
+    # Validación para que el correo tenga formato válido
+    def clean_correo(self):
+        correo = self.cleaned_data.get('correo')
+        if correo and '@' not in correo:
+            raise forms.ValidationError("Por favor ingresa un correo electrónico válido.")
+        return correo
 
-class ParticipantForm(forms.Form):
-    name = forms.CharField(max_length=100, label='Participant Name')
-    email = forms.EmailField(label='Email')
-
-ParticipantFormSet = formset_factory(ParticipantForm, extra=1)
->>>>>>> 23f8484 (implementacion del front, preparando para la conexion con back)
