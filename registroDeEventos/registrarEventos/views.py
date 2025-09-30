@@ -5,7 +5,7 @@ from django.contrib import messages
 from .forms import EventoForm, ParticipanteForm
 from .models import Evento, Participante
 
-# Create your views here.
+
 
 # Se crea el conjunto de formularios de Participantes vinculados al Evento.
 def crear_evento(request):

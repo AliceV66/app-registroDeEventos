@@ -1,6 +1,6 @@
 {% extends 'registrarEventos/base.html' %}
 
-{% block title %}Register New Event{% endblock %}
+{% block title %}Registrar Nuevo Evento{% endblock %}
 
 {% block content %}
 <style>
@@ -67,13 +67,13 @@
     }
 </style>
 
-<h1>Crafting Digital Futures</h1>
-<p class="text-muted mb-5">We are an avant-garde software development company forging new realities. Our minimalist, elegant, and disruptive approach sets a new trend in digital experiences.</p>
+<h1>Planea un evento epico</h1>
+
 
 <form method="post">
     {% csrf_token %}
     <div class="form-section">
-        <h3>Event Details</h3>
+        <h3>Detalles del evento</h3>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="{{ form.nombre.id_for_label }}" class="form-label">{{ form.nombre.label }}</label>
@@ -91,7 +91,7 @@
     </div>
 
     <div class="form-section">
-        <h3>Participants</h3>
+        <h3>Participantes</h3>
         {{ formset.management_form }}
         {% for participant_form in formset %}
             <div class="participant-form">
@@ -110,7 +110,7 @@
     </div>
 
     <div class="text-center">
-        <button type="submit" class="btn btn-primary">Register Event</button>
+        <button type="submit" class="btn btn-primary">Registrar evento</button>
     </div>
 </form>
 {% endblock %}
