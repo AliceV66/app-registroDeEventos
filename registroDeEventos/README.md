@@ -77,6 +77,19 @@ Abre tu navegador web y ve a: **http://127.0.0.1:8000/**
 
 El formulario de registro de eventos estará disponible en la página principal.
 
+## Acceso al Panel de Administrador
+
+Para gestionar los datos directamente, puedes usar el panel de administrador de Django.
+
+1.  **Accede a la URL** del administrador:
+    [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+
+2.  **Inicia sesión** con las siguientes credenciales de prueba:
+    - **Usuario**: `admin`
+    - **Contraseña**: `admin`
+
+*Nota: Si estas credenciales no funcionan, puedes crear tu propio superusuario ejecutando el comando:* `python manage.py createsuperuser`
+
 ## Arquitectura del Proyecto
 
 ###  **Modelo de Datos**
