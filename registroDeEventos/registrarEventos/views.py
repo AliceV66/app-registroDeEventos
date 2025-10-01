@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
-from django.forms import inlineformset_factory
+from django.forms import inlineformset_factory, ValidationError
 from django.db import transaction
 from django.contrib import messages
 from .forms import EventoForm, ParticipanteForm
 from .models import Evento, Participante
-
-
 
 # Se crea el conjunto de formularios de Participantes vinculados al Evento.
 def crear_evento(request):
@@ -24,17 +22,25 @@ def crear_evento(request):
 
         # Validación que tanto el evento como los participantes sean correctos.
         if evento_form.is_valid() and participante_formset.is_valid():
-            with transaction.atomic(): # Asegura que todo se guarde correctamente o en caso contrario no se guarde nada.
-                evento = evento_form.save() # Se guarda el evento.
+            
+            # Prepara los participantes sin guardarlos para poder contarlos.
+            participantes = participante_formset.save(commit=False)
+            
+            # Si la lista de participantes a guardar está vacía, añade un error al formulario.
+            if not participantes:
+                evento_form.add_error(None, ValidationError("Debes añadir al menos un participante para registrar el evento."))
+            else:
+                # Si hay al menos un participante, procede a guardar todo.
+                with transaction.atomic(): # Asegura que todo se guarde correctamente.
+                    evento = evento_form.save() # Se guarda el evento.
 
-                # Se preparan los partcipantes, pero aún no se guardan en la Base de Datos.
-                participantes = participante_formset.save(commit=False)
-                for participante in participantes:
-                    participante.evento = evento # Se asigna el evento recién creado a cada participante.
-                    participante.save() # Se guarda el participante en la Base de Datos.
+                    # Se asocian y guardan los participantes.
+                    for participante in participantes:
+                        participante.evento = evento # Se asigna el evento recién creado.
+                        participante.save() # Se guarda el participante.
 
-            messages.success(request, '¡Evento Registrado con ÉXITO!')
-            return redirect('crear_evento') # Se redirige para limpiar el formulario y evitar reenvíos.
+                messages.success(request, '¡Evento Registrado con ÉXITO!')
+                return redirect('crear_evento') # Se redirige para limpiar el formulario.
 
     # El usuario visita la página (método GET).
     else:
@@ -48,6 +54,5 @@ def crear_evento(request):
         'participante_formset': participante_formset,
     }
 
-    # Se rendereiza el HTML con los formularios.
+    # Se renderiza el HTML con los formularios.
     return render(request, 'registrarEventos/crear_evento.html', context)
-
